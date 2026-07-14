@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="Hyperbolic Embeddings for Hierarchical Open-Vocabulary Radiance Fields.">
+  <meta name="keywords" content="OpenHype, NeRF, Hyperbolic Embeddings, Hierarchical">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>OpenHype: Hyperbolic Embeddings for Hierarchical Open-Vocabulary Radiance Fields</title>
+
+  
+  <!-- MathJax config (enable $...$ as inline, and \(..\) too) -->
+  <script>
+  window.MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      displayMath: [['$$','$$'], ['\\[','\\]']],
+      processEscapes: true
+    },
+    options: {
+      skipHtmlTags: ['script','noscript','style','textarea','pre']
+    }
+  };
+  </script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="icon" type="image/x-icon" href="./static/images/favicon.ico" >
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+</head>
+<body>
+
+<nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+  <div class="navbar-menu">
+    <div class="navbar-start" style="flex-grow: 1; justify-content: center;">
+      <a class="navbar-item" href="https://lisaweijler.github.io/">
+      <span class="icon">
+          <i class="fas fa-home"></i>
+      </span>
+      </a>
+
+      <div class="navbar-item has-dropdown is-hoverable">
+        <a class="navbar-link">
+          More Research
+        </a>
+        <div class="navbar-dropdown">
+          <a class="navbar-item" href="https://lisaweijler.github.io/publications/">
+            Publications
+          </a>
+          
+        </div>
+      </div>
+    </div>
+
+  </div>
+</nav>
+
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-1 publication-title">OpenHype: Hyperbolic Embeddings for Hierarchical Open-Vocabulary Radiance Fields</h1>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">
+              <a href="https://lisaweijler.github.io/">Lisa Weijler</a><sup>1</sup>,</span>
+            <span class="author-block">
+              <a href="https://kochsebastian.com/">Sebastian Koch</a><sup>2</sup>,</span>
+            <span class="author-block">
+              <a href="https://fabiopoiesi.github.io/">Fabio Poiesi</a><sup>3</sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://scholar.google.com/citations?user=FuY-lbcAAAAJ">Timo Ropinski</a><sup>2</sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://phermosilla.github.io/">Pedro Hermosilla</a><sup>1</sup>,
+            </span>
+            
+          </div>
+
+          <div class="is-size-5 publication-authors">
+            <span class="author-block"><sup>1</sup>TU Wien,</span>
+            <span class="author-block"><sup>2</sup>Ulm University,</span>
+            <span class="author-block"><sup>3</sup>Fondazione Bruno Kessler</span>
+          </div>
+
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <!-- PDF Link. -->
+              <span class="link-block">
+                <a href="https://openreview.net/pdf?id=zQmXDUbZ5D"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>Paper</span>
+                </a>
+              </span>
+              <span class="link-block">
+                <a href="https://arxiv.org/abs/2510.21441"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>arXiv</span>
+                </a>
+              </span>
+              <!-- Code Link. -->
+              <span class="link-block">
+                <a href="https://github.com/lisaweijler/openhype"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-github"></i>
+                  </span>
+                  <span>Code</span>
+                  </a>
+              </span>
+              <!-- Dataset Link. -->
+              <span class="link-block">
+                <a href="./static/images/openhype_poster.pdf"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-palette"></i>
+                  </span>
+                  <span>Poster
+                  </span>
+                </a>
+              </span>
+              <span class="link-block">
+                <a href="https://github.com/lisaweijler/openhype/blob/main/benchmark/README.md"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="far fa-images"></i>
+                  </span>
+                  <span>Data
+                  </span>
+                </a>
+              </span>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="hero teaser">
+  <div class="container is-max-desktop">
+    <div class="hero-body">
+
+          <h2 class="subtitle is-3 has-text-centered">
+           TL;DR OpenHype represents scene hierarchies using hyperbolic geometry, enabling
+            multi-scale, open-vocabulary 3D scene representations.
+          </h2>
+    </div>
+  </div>
+</section>
+
+
+<section class="hero is-light is-small">
+  <div class="hero-body">
+    <div class="container">
+      <div class="columns is-vcentered">
+        
+        <!-- Left side -->
+        <div class="column is-one-third has-text-right" >
+          <div>
+          <img src="./static/images/scene_hierarchy.png"
+                 class="teaser-image"
+                 alt="scene hierarchy example"
+                 style="width: 190px; height: auto;"/>
+          </div>
+        </div>
+        
+        <!-- Right side -->
+        <div class="column is-two-third has-text-left" >
+          <div>
+          <h2 class="subtitle is-5">
+           3D objects and scenes have inherent (semantic) hierarchical structures. As objects and their relationships are naturally organized in a multi-scale fashion, understanding 3D scenes requires capturing hierarchical composition.
+          </h2>
+
+          <h2 class="subtitle is-5" style="margin-bottom: 4em;">
+           Existing methods struggle with multi-level granularity; multiple rendering passes are required and/or only predefined discrete hierarchies are captured.
+
+          </h2>
+
+          
+          <ul class="subtitle is-5" style="list-style-type: none; padding-left: 0; margin: 0;">
+            <li style="font-weight: bold; font-size: 1.2em; margin-bottom: 0.5em;">OpenHype:</li>
+            
+            <li>👉Encodes multi-scale relationships naturally due to hyperbolic geometry.</li>
+            <li>👉Enables continuous traversal of hierarchy through geodesic paths.</li>
+            <li>👉Outperforms state-of-the-art in segmentation performance and efficiency.
+</li>
+          </ul>
+          </div>
+        </div>
+
+      </div>
+     
+    </div>
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <!-- Abstract. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            Modeling the inherent hierarchical structure of 3D objects and 3D scenes is highly desirable, as it enables a more holistic understanding of environments for autonomous agents. 
+Accomplishing this with implicit representations, such as Neural Radiance Fields, remains an unexplored challenge.
+          </p>
+          <p>
+Existing methods that explicitly model hierarchical structures often face significant limitations: they either require multiple rendering passes to capture embeddings at different levels of granularity, significantly increasing inference time, or rely on predefined, closed-set discrete hierarchies that generalize poorly to the diverse and nuanced structures encountered by agents in the real world.
+          </p>
+          <p>
+            To address these challenges, we propose OpenHype, a novel approach that represents scene hierarchies using a continuous hyperbolic latent space.
+By leveraging the properties of hyperbolic geometry, OpenHype naturally encodes multi-scale relationships and enables smooth traversal of hierarchies through geodesic paths in latent space. 
+Our method outperforms state-of-the-art approaches on standard benchmarks, demonstrating superior efficiency and adaptability in 3D scene understanding.
+          </p>
+        </div>
+      </div>
+    </div>
+    <!--/ Abstract. -->
+
+    
+  </div>
+</section>
+
+<!-- Methods. -->
+<section class="section">
+  <div class="container is-max-desktop has-text-centered">
+    
+    <h2 class="title is-3 is-centered">Methods</h2>
+    
+      
+      
+          <h2 class="title is-4">1. Auto-encoder training</h2>
+          <div>
+          <p style = "margin-bottom: 1em;">
+                  Mask hierarchies are extracted with Semantic-SAM from input images and 
+                  encoded with CLIP to obtain features.
+                  An auto-encoder using all training images of a scene is trained to learn a hyperbolic latent space that encodes the hierarchical relationships between the masks. Leaf nodes represent the smallest parts and are furthest away from the origin $O$.
+                </p>
+              <p style = "margin-bottom: 1em;">
+                  The hierarchical loss operates in hyperbolic space and is the sum of two contrastive losses: 
+                  for one, we use the geodesic distance $d$ between two nodes in the hierarchy as a measure of similarity, 
+                  and for the other, we use the exterior angle $\alpha$.
+                </p>
+          </div>
+          <div class="columns is-centered">
+            <div class="column">
+              <div class="content">
+                
+                <img src="./static/images/methodAE_fulllatent.png"
+                    class="teaser-image"
+                    alt="scene hierarchy example"
+                    style="width: auto; height: 230px; ;"/>
+                
+                
+              </div>
+            </div>
+
+            <div class="column">
+              <div class="content">
+                <div>
+                <img src="./static/images/methodAE_original.png"
+                    class="teaser-image"
+                    alt="scene hierarchy example"
+                    style="width: auto; height: 180px;"/>
+                </div>
+                <div>
+                <img src="./static/images/legend.png"
+                    class="teaser-image"
+                    alt="scene hierarchy example"
+                    style="width: 150px; height: auto;"/>
+                </div>
+                
+                
+              </div>
+            </div>
+          </div>     
+      
+        <h2 class="title is-4">2. NeRF training</h2>
+        <div class="columns is-centered">
+          <div class="column content">
+            <p>
+              Together with a color and density field, a vision-language (VL) feature field is trained. 
+              In contrast to existing approaches, this VL field encodes not just single features but a full curve (geodesic path from leaf node to origin) that represents the hierarchies of objects and parts one pixel is part of.
+            </p>
+            <div> 
+            <img src="./static/images/method_nerftraining_original.png"
+                      class="teaser-image"
+                      alt="scene hierarchy example"
+                      style="width: auto; height: 150px;"/>
+            </div>
+            <div>
+            <img src="./static/images/legend.png"
+                    class="teaser-image"
+                    alt="scene hierarchy example"
+                    style="width: 150px; height: auto;"/>
+            </div>
+          </div>
+
+        </div>
+
+        <h2 class="title is-4">3. Inference</h2>
+        <div class="columns is-centered">
+          <div class="column content">
+            <p>
+              During inference, hierarchical traversal along geodesics in hyperbolic space produces multi-scale semantic responses,
+aggregated through a softmax-weighted scheme for robust open-vocabulary segmentation.
+            </p>
+            <img src="./static/images/inference.png"
+                      class="teaser-image"
+                      alt="scene hierarchy example"
+                      style="width: auto; height: auto;"/>
+            
+          </div>
+
+        </div>
+    
+  </div>
+</section>
+<!--/ Methods. -->
+
+<!-- Results. -->
+<section class="section">
+  <div class="container is-max-desktop has-text-centered">
+    
+    <h2 class="title is-3 is-centered">Results</h2>
+    <h2 class="title is-4">Quantitative</h2>
+    <p style = "margin-bottom: 1em;">
+      We evaluate OpenHype on the Search3D benchmark and the LERF dataset. On Search3D,
+OpenHype improves mean IoU by +8.9 and accuracy by +12.1 on part-level queries compared
+to state-of-the-art baselines. On LERF, our method surpasses
+recent discrete-hierarchy approaches, including N2F2 with an overall IoU of 54.6. 
+    </p>
+    <img src="./static/images/results_table.png"
+                    class="teaser-image"
+                    alt="scene hierarchy example"
+                    style="width: 730px; height: auto;"/>
+
+
+                    
+    <h2 class="title is-4">Qualitative</h2>
+    <p style = "margin-bottom: 1em;">
+    We visualize our hyperbolic latent space using CO-SNE, 
+    showing how mask features are organized along geodesic paths. 
+    The embeddings capture the mask hierarchy — with higher-level masks near the origin, 
+    lower-level masks near the boundary, and consistent object features across views.
+     
+    </p>
+    
+    <img src="./static/images/embeddings_viz.png"
+                    class="teaser-image"
+                    alt="scene hierarchy example"
+                    style="width: 800px; height: auto; margin-bottom: 1em;"/>
+
+    <p style = "margin-bottom: 1em;">
+      OpenHype segments both large objects and small parts. 
+      For example, it can distinguish between a normal keyboard and a laptop keyboard 
+      as well as correctly segment the printer control panel, 
+      showing that it mitigates the bag-of-words issues of CLIP features.
+  </p>
+
+    <img src="./static/images/qualitative_main.png"
+                    class="teaser-image"
+                    alt="scene hierarchy example"
+                    style="width: 800px; height: auto; margin-bottom: 1em;"/>
+
+
+  <h2 class="title is-4">Hierarchical grouping</h2>
+    <p style = "margin-bottom: 1em;">
+   Given a pixel of interest, OpenHype can traverse the learned hyperbolic space to group the pixel into increasingly broader categories, 
+   effectively revealing the hierarchical structure of the scene.
+
+    </p>
+    
+    <img src="./static/images/grouping_gif.gif"
+                    class="teaser-image"
+                    alt="scene hierarchy example"
+                    style="width: 800px; height: auto; margin-bottom: 1em;"/>
+
+    <p style = "margin-bottom: 1em;">
+      We provide a qualitative comparison with the “is part of” relationship querying of <a href="https://relationfield.github.io/">RelationField</a>, which comes closest to hierarchical scene understanding. The pixel of interest is on the fridge door. 
+      While RelationField highlights only part of the fridge and handles single level hierarchies, OpenHype naturally supports hierarchical grouping by leveraging the structure of 
+      our hyperbolic embeddings, without requiring explicit queries.
+  </p>
+
+    <img src="./static/images/relationfield.png"
+                    class="teaser-image"
+                    alt="scene hierarchy example"
+                    style="width: 800px; height: auto;"/>
+  </div>
+</section>
+
+
+<section class="section" id="BibTeX">
+  <div class="container is-max-desktop content">
+    <h2 class="title">BibTeX</h2>
+    <pre><code>@article{weijler2025openhype,
+  author    = {Weijler, Lisa and Koch, Sebastian and Poiesi, Fabio and Ropinski, Timo and Hermosilla, Pedro},
+  title     = {OpenHype: Hyperbolic Embeddings for Hierarchical Open-Vocabulary Radiance Fields},
+  journal   = {NeurIPS},
+  year      = {2025},
+}</code></pre>
+  </div>
+</section>
+
+
+<footer class="footer">
+  <div class="container">
+    <div class="content has-text-centered">
+      
+    </div>
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+          <p>
+            This website is licensed under a <a rel="license"
+                                                href="http://creativecommons.org/licenses/by-sa/4.0/">Creative
+            Commons Attribution-ShareAlike 4.0 International License</a>.
+          </p>
+          <p>
+            It borrows the source code of <a
+              href="https://github.com/nerfies/nerfies.github.io">this</a> website. 
+              We would like to thank Utkarsh Sinha and Keunhong Park.
+              
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
