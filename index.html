@@ -3,12 +3,12 @@
 <head>
   <meta charset="utf-8">
   <meta name="description"
-        content="Hyperbolic Embeddings for Hierarchical Open-Vocabulary Radiance Fields.">
-  <meta name="keywords" content="OpenHype, NeRF, Hyperbolic Embeddings, Hierarchical">
+        content="Latent Riemannian Flow Matching for Geometry-Grounded 3D Foundation Models: generative 3D scene modeling by flow matching directly on VGGT's latent manifold.">
+  <meta name="keywords" content="Riemannian Flow Matching, VGGT, 3D Foundation Models, Novel View Synthesis, 3D Scene Generation">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>OpenHype: Hyperbolic Embeddings for Hierarchical Open-Vocabulary Radiance Fields</title>
+  <title>Latent Riemannian Flow Matching for Geometry-Grounded 3D Foundation Models</title>
 
-  
+
   <!-- MathJax config (enable $...$ as inline, and \(..\) too) -->
   <script>
   window.MathJax = {
@@ -68,7 +68,7 @@
           <a class="navbar-item" href="https://lisaweijler.github.io/publications/">
             Publications
           </a>
-          
+
         </div>
       </div>
     </div>
@@ -77,40 +77,42 @@
 </nav>
 
 
+<!-- Hero: title, authors, links. -->
 <section class="hero">
   <div class="hero-body">
     <div class="container is-max-desktop">
       <div class="columns is-centered">
         <div class="column has-text-centered">
-          <h1 class="title is-1 publication-title">OpenHype: Hyperbolic Embeddings for Hierarchical Open-Vocabulary Radiance Fields</h1>
+          <h1 class="title is-1 publication-title">Latent Riemannian Flow Matching for Geometry-Grounded 3D Foundation Models</h1>
           <div class="is-size-5 publication-authors">
             <span class="author-block">
               <a href="https://lisaweijler.github.io/">Lisa Weijler</a><sup>1</sup>,</span>
             <span class="author-block">
-              <a href="https://kochsebastian.com/">Sebastian Koch</a><sup>2</sup>,</span>
+              <a href="https://iballester.github.io/">Irene Ballester</a><sup>1</sup>,</span>
             <span class="author-block">
-              <a href="https://fabiopoiesi.github.io/">Fabio Poiesi</a><sup>3</sup>,
+              <a href="https://gfmei.github.io/">Guofeng Mei</a><sup>2</sup>,
             </span>
             <span class="author-block">
-              <a href="https://scholar.google.com/citations?user=FuY-lbcAAAAJ">Timo Ropinski</a><sup>2</sup>,
+              <a href="https://tolgabirdal.github.io/">Tolga Birdal</a><sup>3</sup>,
             </span>
             <span class="author-block">
-              <a href="https://phermosilla.github.io/">Pedro Hermosilla</a><sup>1</sup>,
+              <a href="https://phermosilla.github.io/">Pedro Hermosilla</a><sup>1</sup>
             </span>
-            
+
           </div>
 
           <div class="is-size-5 publication-authors">
             <span class="author-block"><sup>1</sup>TU Wien,</span>
-            <span class="author-block"><sup>2</sup>Ulm University,</span>
-            <span class="author-block"><sup>3</sup>Fondazione Bruno Kessler</span>
+            <span class="author-block"><sup>2</sup>Fondazione Bruno Kessler,</span>
+            <span class="author-block"><sup>3</sup>Imperial College London</span>
           </div>
 
           <div class="column has-text-centered">
             <div class="publication-links">
               <!-- PDF Link. -->
+              <!-- TODO: add paper link -->
               <span class="link-block">
-                <a href="https://openreview.net/pdf?id=zQmXDUbZ5D"
+                <a href="#"
                    class="external-link button is-normal is-rounded is-dark">
                   <span class="icon">
                       <i class="fas fa-file-pdf"></i>
@@ -118,8 +120,9 @@
                   <span>Paper</span>
                 </a>
               </span>
+              <!-- TODO: add arXiv link -->
               <span class="link-block">
-                <a href="https://arxiv.org/abs/2510.21441"
+                <a href="#"
                    class="external-link button is-normal is-rounded is-dark">
                   <span class="icon">
                       <i class="ai ai-arxiv"></i>
@@ -128,8 +131,9 @@
                 </a>
               </span>
               <!-- Code Link. -->
+              <!-- TODO: add code link -->
               <span class="link-block">
-                <a href="https://github.com/lisaweijler/openhype"
+                <a href="#"
                    class="external-link button is-normal is-rounded is-dark">
                   <span class="icon">
                       <i class="fab fa-github"></i>
@@ -137,27 +141,6 @@
                   <span>Code</span>
                   </a>
               </span>
-              <!-- Dataset Link. -->
-              <span class="link-block">
-                <a href="./static/images/openhype_poster.pdf"
-                   class="external-link button is-normal is-rounded is-dark">
-                  <span class="icon">
-                      <i class="fas fa-palette"></i>
-                  </span>
-                  <span>Poster
-                  </span>
-                </a>
-              </span>
-              <span class="link-block">
-                <a href="https://github.com/lisaweijler/openhype/blob/main/benchmark/README.md"
-                   class="external-link button is-normal is-rounded is-dark">
-                  <span class="icon">
-                      <i class="far fa-images"></i>
-                  </span>
-                  <span>Data
-                  </span>
-                </a>
-              </span>
             </div>
 
           </div>
@@ -167,258 +150,210 @@
   </div>
 </section>
 
+<!-- Teaser: overview figure + one-line TL;DR. -->
 <section class="hero teaser">
   <div class="container is-max-desktop">
-    <div class="hero-body">
-
-          <h2 class="subtitle is-3 has-text-centered">
-           TL;DR OpenHype represents scene hierarchies using hyperbolic geometry, enabling
-            multi-scale, open-vocabulary 3D scene representations.
-          </h2>
+    <div class="hero-body" style="padding-top: 0;">
+      <img src="./static/images/overview.png"
+           alt="Method overview: VGGT encoder, Riemannian flow matching on the product manifold, DPT decoding heads"
+           style="width: 100%; height: auto;"/>
+      <h2 class="subtitle has-text-centered" style="margin-top: 1.5em;">
+        <b>TL;DR</b> &nbsp;We turn a frozen, deterministic 3D foundation model (VGGT) 
+        into a generative one by performing Riemannian flow matching directly in its latent space.
+        Working in latent space keeps us representation-agnostic and lets us inherit VGGT's 3D priors for free: one model that faithfully reconstructs what's observed and plausibly generates what isn't, from as little as a single unposed image.
+      </h2>
     </div>
   </div>
 </section>
 
-
+<!-- At a glance: three cards. -->
 <section class="hero is-light is-small">
   <div class="hero-body">
-    <div class="container">
-      <div class="columns is-vcentered">
-        
-        <!-- Left side -->
-        <div class="column is-one-third has-text-right" >
-          <div>
-          <img src="./static/images/scene_hierarchy.png"
-                 class="teaser-image"
-                 alt="scene hierarchy example"
-                 style="width: 190px; height: auto;"/>
+    <div class="container is-max-widescreen">
+      <div class="columns is-centered">
+
+        <div class="column">
+          <div class="box" style="height: 100%;">
+            <p class="has-text-centered" style="font-size: 2rem; margin-bottom: 0.3em;">
+              <span class="icon has-text-dark"><i class="fas fa-magic"></i></span>
+            </p>
+            <p class="title is-5 has-text-centered">From reconstruction to generation</p>
+            <p>
+              VGGT is deterministic: it cannot go beyond what the input views support.
+              Our model generates plausible geometry and appearance for unseen regions
+              while faithfully preserving the observed ones.
+            </p>
           </div>
         </div>
-        
-        <!-- Right side -->
-        <div class="column is-two-third has-text-left" >
-          <div>
-          <h2 class="subtitle is-5">
-           3D objects and scenes have inherent (semantic) hierarchical structures. As objects and their relationships are naturally organized in a multi-scale fashion, understanding 3D scenes requires capturing hierarchical composition.
-          </h2>
 
-          <h2 class="subtitle is-5" style="margin-bottom: 4em;">
-           Existing methods struggle with multi-level granularity; multiple rendering passes are required and/or only predefined discrete hierarchies are captured.
+        <div class="column">
+          <div class="box" style="height: 100%;">
+            <p class="has-text-centered" style="font-size: 2rem; margin-bottom: 0.3em;">
+              <span class="icon has-text-dark"><i class="fas fa-globe"></i></span>
+            </p>
+            <p class="title is-5 has-text-centered">Grounded in the latent geometry</p>
+            <p>
+              VGGT tokens do not live in Euclidean space but on a product of four
+              zero-mean hyperspheres. Euclidean flow matching collapses there;
+              our Riemannian formulation keeps every sample on the manifold the
+              frozen decoders expect.
+            </p>
+          </div>
+        </div>
 
-          </h2>
-
-          
-          <ul class="subtitle is-5" style="list-style-type: none; padding-left: 0; margin: 0;">
-            <li style="font-weight: bold; font-size: 1.2em; margin-bottom: 0.5em;">OpenHype:</li>
-            
-            <li>👉Encodes multi-scale relationships naturally due to hyperbolic geometry.</li>
-            <li>👉Enables continuous traversal of hierarchy through geodesic paths.</li>
-            <li>👉Outperforms state-of-the-art in segmentation performance and efficiency.
-</li>
-          </ul>
+        <div class="column">
+          <div class="box" style="height: 100%;">
+            <p class="has-text-centered" style="font-size: 2rem; margin-bottom: 0.3em;">
+              <span class="icon has-text-dark"><i class="fas fa-camera"></i></span>
+            </p>
+            <p class="title is-5 has-text-centered">Minimal assumptions</p>
+            <p>
+              Order-invariant in the context views, works from a single unposed image,
+              and needs only the relative target pose; no input poses, no trajectory
+              or adjacency assumptions of video-diffusion and explicit-reconstruction
+              baselines.
+            </p>
           </div>
         </div>
 
       </div>
-     
     </div>
   </div>
 </section>
 
 
+<!-- Abstract. -->
 <section class="section">
   <div class="container is-max-desktop">
-    <!-- Abstract. -->
     <div class="columns is-centered has-text-centered">
       <div class="column is-four-fifths">
         <h2 class="title is-3">Abstract</h2>
         <div class="content has-text-justified">
           <p>
-            Modeling the inherent hierarchical structure of 3D objects and 3D scenes is highly desirable, as it enables a more holistic understanding of environments for autonomous agents. 
-Accomplishing this with implicit representations, such as Neural Radiance Fields, remains an unexplored challenge.
-          </p>
-          <p>
-Existing methods that explicitly model hierarchical structures often face significant limitations: they either require multiple rendering passes to capture embeddings at different levels of granularity, significantly increasing inference time, or rely on predefined, closed-set discrete hierarchies that generalize poorly to the diverse and nuanced structures encountered by agents in the real world.
-          </p>
-          <p>
-            To address these challenges, we propose OpenHype, a novel approach that represents scene hierarchies using a continuous hyperbolic latent space.
-By leveraging the properties of hyperbolic geometry, OpenHype naturally encodes multi-scale relationships and enables smooth traversal of hierarchies through geodesic paths in latent space. 
-Our method outperforms state-of-the-art approaches on standard benchmarks, demonstrating superior efficiency and adaptability in 3D scene understanding.
+            Geometric foundation models, such as the Visual Geometry Grounded Transformer (VGGT), provide strong 3D priors from unposed images. However, such models operate purely in a feed-forward, deterministic regime, <em>i.e.</em> they cannot generate plausible geometry beyond what the input views directly support. Generative models for 3D scenes, on the other hand, must rely on strong geometric priors to produce coherent outputs from sparse inputs. We bridge these two paradigms by performing flow matching directly in VGGT's latent space, leveraging its learned 3D priors without committing to any explicit downstream representation such as Gaussians, meshes, or video-VAE latents. This requires respecting the latent geometry: VGGT tokens occupy a product of high-dimensional hyperspheres on which standard Euclidean flow matching fails. We address this with a Riemannian Flow Matching framework defined on a product manifold of four hyperspheres, aligned with VGGT's multi-scale encoder, which keeps generated tokens on the valid data manifold required by the frozen decoding heads. On RealEstate10K, ScanNet++ and ETH3D, our method achieves strong performance against recent scene generation baselines in both per-view appearance and aggregated 3D geometry, establishing latent-space flow matching on geometric foundation models as a viable paradigm for 3D generation.
           </p>
         </div>
       </div>
     </div>
-    <!--/ Abstract. -->
-
-    
   </div>
 </section>
+<!--/ Abstract. -->
 
-<!-- Methods. -->
-<section class="section">
-  <div class="container is-max-desktop has-text-centered">
-    
-    <h2 class="title is-3 is-centered">Methods</h2>
-    
-      
-      
-          <h2 class="title is-4">1. Auto-encoder training</h2>
-          <div>
-          <p style = "margin-bottom: 1em;">
-                  Mask hierarchies are extracted with Semantic-SAM from input images and 
-                  encoded with CLIP to obtain features.
-                  An auto-encoder using all training images of a scene is trained to learn a hyperbolic latent space that encodes the hierarchical relationships between the masks. Leaf nodes represent the smallest parts and are furthest away from the origin $O$.
-                </p>
-              <p style = "margin-bottom: 1em;">
-                  The hierarchical loss operates in hyperbolic space and is the sum of two contrastive losses: 
-                  for one, we use the geodesic distance $d$ between two nodes in the hierarchy as a measure of similarity, 
-                  and for the other, we use the exterior angle $\alpha$.
-                </p>
-          </div>
-          <div class="columns is-centered">
-            <div class="column">
-              <div class="content">
-                
-                <img src="./static/images/methodAE_fulllatent.png"
-                    class="teaser-image"
-                    alt="scene hierarchy example"
-                    style="width: auto; height: 230px; ;"/>
-                
-                
-              </div>
-            </div>
+<!-- Method. -->
+<section class="section" style="padding-top: 1rem;">
+  <div class="container is-max-desktop">
 
-            <div class="column">
-              <div class="content">
-                <div>
-                <img src="./static/images/methodAE_original.png"
-                    class="teaser-image"
-                    alt="scene hierarchy example"
-                    style="width: auto; height: 180px;"/>
-                </div>
-                <div>
-                <img src="./static/images/legend.png"
-                    class="teaser-image"
-                    alt="scene hierarchy example"
-                    style="width: 150px; height: auto;"/>
-                </div>
-                
-                
-              </div>
-            </div>
-          </div>     
-      
-        <h2 class="title is-4">2. NeRF training</h2>
-        <div class="columns is-centered">
-          <div class="column content">
-            <p>
-              Together with a color and density field, a vision-language (VL) feature field is trained. 
-              In contrast to existing approaches, this VL field encodes not just single features but a full curve (geodesic path from leaf node to origin) that represents the hierarchies of objects and parts one pixel is part of.
-            </p>
-            <div> 
-            <img src="./static/images/method_nerftraining_original.png"
-                      class="teaser-image"
-                      alt="scene hierarchy example"
-                      style="width: auto; height: 150px;"/>
-            </div>
-            <div>
-            <img src="./static/images/legend.png"
-                    class="teaser-image"
-                    alt="scene hierarchy example"
-                    style="width: 150px; height: auto;"/>
-            </div>
-          </div>
+    <h2 class="title is-3 has-text-centered">Method</h2>
 
-        </div>
+    <div class="content has-text-justified">
+      <p>
+        Given a set of unposed RGB images of a scene and a target camera pose $\pi \in SE(3)$,
+        our goal is to generate latent features that encode the geometry and appearance of the
+        scene from the target viewpoint, remaining multi-view consistent with the observed views.
+        We cast this as conditional generative modeling on the VGGT encoder latent space: given
+        context tokens $c = \{c^{(1)}, \ldots, c^{(N)}\}$ extracted from the context views and the
+        target pose $\pi$, we model the conditional distribution $p(x_1 \mid c, \pi)$ on a
+        Riemannian manifold $\mathcal{M}$, where $x_1$ is the latent code of the target view.
+      </p>
+      <p>
+        A frozen VGGT encoder extracts the context tokens, and a transformer velocity field
+        conditioned on $c$ and $\pi$ generates $x_1$ via Riemannian flow matching. Since the model
+        operates directly on VGGT's latent space, its frozen DPT heads decode the generated
+        latents into point maps and depth; a newly trained RGB head adds
+        appearance.
+      </p>
+    </div>
 
-        <h2 class="title is-4">3. Inference</h2>
-        <div class="columns is-centered">
-          <div class="column content">
-            <p>
-              During inference, hierarchical traversal along geodesics in hyperbolic space produces multi-scale semantic responses,
-aggregated through a softmax-weighted scheme for robust open-vocabulary segmentation.
-            </p>
-            <img src="./static/images/inference.png"
-                      class="teaser-image"
-                      alt="scene hierarchy example"
-                      style="width: auto; height: auto;"/>
-            
-          </div>
+    <div style="margin-top: 1.5em;">
+      <h3 class="title is-4">Why Riemannian?</h3>
+      <div class="content has-text-justified">
+        <img src="./static/images/layernorm.png"
+             alt="LayerNorm maps features onto a zero-mean hypersphere"
+             style="float: right; width: 40%; max-width: 340px; height: auto; margin: 0.3em 0 0.8em 1.5em;"/>
+        <p>
+          Each of VGGT's four multi-scale feature blocks passes through a LayerNorm before
+          decoding: subtracting the mean and rescaling the norm places every token on a
+          zero-mean hypersphere $\mathcal{S}^{C-2} = \{x \in \mathbb{R}^{C} : \|x\|_2 = \sqrt{C},\ \langle \mathbf{1}, x\rangle = 0\}$.
+          The latent space is therefore an <em>explicit</em> product manifold
+          $\mathcal{M} = (\mathcal{S}^{C-2})^{4}$ as a consequence of
+          the architecture.
+        </p>
+        <p>
+          Euclidean flow matching pushes probability paths through the empty interior of these
+          spheres. Riemannian flow matching with geodesic interpolants stays on
+          $\mathcal{M}$, so the generated tokens remain valid inputs for the frozen decoding heads.
+        </p>
+        <div style="clear: both;"></div>
+      </div>
+    </div>
 
-        </div>
-    
   </div>
 </section>
-<!--/ Methods. -->
+<!--/ Method. -->
 
 <!-- Results. -->
-<section class="section">
-  <div class="container is-max-desktop has-text-centered">
-    
-    <h2 class="title is-3 is-centered">Results</h2>
-    <h2 class="title is-4">Quantitative</h2>
-    <p style = "margin-bottom: 1em;">
-      We evaluate OpenHype on the Search3D benchmark and the LERF dataset. On Search3D,
-OpenHype improves mean IoU by +8.9 and accuracy by +12.1 on part-level queries compared
-to state-of-the-art baselines. On LERF, our method surpasses
-recent discrete-hierarchy approaches, including N2F2 with an overall IoU of 54.6. 
-    </p>
-    <img src="./static/images/results_table.png"
-                    class="teaser-image"
-                    alt="scene hierarchy example"
-                    style="width: 730px; height: auto;"/>
+<section class="section" style="padding-top: 1rem;">
+  <div class="container is-max-desktop">
 
+    <h2 class="title is-3 has-text-centered">Results</h2>
 
-                    
-    <h2 class="title is-4">Qualitative</h2>
-    <p style = "margin-bottom: 1em;">
-    We visualize our hyperbolic latent space using CO-SNE, 
-    showing how mask features are organized along geodesic paths. 
-    The embeddings capture the mask hierarchy — with higher-level masks near the origin, 
-    lower-level masks near the boundary, and consistent object features across views.
-     
-    </p>
-    
-    <img src="./static/images/embeddings_viz.png"
-                    class="teaser-image"
-                    alt="scene hierarchy example"
-                    style="width: 800px; height: auto; margin-bottom: 1em;"/>
+    <h3 class="title is-4">Novel view generation</h3>
+    <div class="content has-text-justified">
+      <p>
+        On ScanNet++ and RE10K we improve over Gen3R and DepthSplat in per-view geometry across
+        all configurations and remain competitive in appearance, despite using strictly less
+        camera information than the baselines. Operating generatively on the VGGT manifold
+        preserves the geometric properties of the backbone while extending it to the unobserved
+        regions that novel-view generation requires.
+      </p>
+    </div>
+    <img src="./static/images/final_rgb_depth.jpg"
+         alt="Qualitative novel view generation on ScanNet++ and RE10K: RGB and depth comparisons against Gen3R and DepthSplat"
+         style="width: 100%; height: auto; margin-bottom: 1em;"/>
+    <div class="content has-text-justified">
+      
+      <ul>
+        <li><b>DepthSplat</b>, lacking generative capability, can only interpolate within the visible support &mdash; empty regions and artifacts appear wherever the target view extends beyond it.</li>
+        <li><b>Gen3R</b> often renders a slightly incorrect viewpoint, visible in the RE10K and ScanNet++ results.</li>
+        <li><b>Convincing RGB does not imply correct geometry</b>: appearance can look plausible while the underlying depth is wrong, texture effectively masking missing structure.</li>
+      </ul>
+    </div>
 
-    <p style = "margin-bottom: 1em;">
-      OpenHype segments both large objects and small parts. 
-      For example, it can distinguish between a normal keyboard and a laptop keyboard 
-      as well as correctly segment the printer control panel, 
-      showing that it mitigates the bag-of-words issues of CLIP features.
-  </p>
+    <h3 class="title is-4" style="margin-top: 2em;">3D scan generation</h3>
+    <div class="content has-text-justified">
+      <p>
+        Fusing generated target views and context views into a single point cloud probes 3D
+        consistency, not just per-view quality. Our scans are coherent and well aligned, close to
+        the VGGT upper bound, and generalize to the out-of-distribution ETH3D scenes, while Gen3R
+exhibits noticeably larger distortions and misaligned frames.
+      </p>
+    </div>
+    <img src="./static/images/final_3d.jpg"
+         alt="Qualitative 3D scan generation on ScanNet++ and ETH3D: fused point clouds for GT, VGGT, Ours, and Gen3R"
+         style="width: 100%; height: auto; margin-bottom: 1.5em;"/>
 
-    <img src="./static/images/qualitative_main.png"
-                    class="teaser-image"
-                    alt="scene hierarchy example"
-                    style="width: 800px; height: auto; margin-bottom: 1em;"/>
+    <h3 class="title is-4" style="margin-top: 2em;">Does the geometry matter?</h3>
+    <div class="content has-text-justified">
+      <p>
+        Replacing our Riemannian formulation with Euclidean flow matching degrades every metric
+        on both modalities: LPIPS by ~44%, RGB FID by ~29%, depth metrics by ~11&ndash;18%.
+        Modeling the manifold structure of the latent space is beneficial rather than incidental.
+      </p>
+    </div>
 
+  </div>
+</section>
+<!--/ Results. -->
 
-  <h2 class="title is-4">Hierarchical grouping</h2>
-    <p style = "margin-bottom: 1em;">
-   Given a pixel of interest, OpenHype can traverse the learned hyperbolic space to group the pixel into increasingly broader categories, 
-   effectively revealing the hierarchical structure of the scene.
-
-    </p>
-    
-    <img src="./static/images/grouping_gif.gif"
-                    class="teaser-image"
-                    alt="scene hierarchy example"
-                    style="width: 800px; height: auto; margin-bottom: 1em;"/>
-
-    <p style = "margin-bottom: 1em;">
-      We provide a qualitative comparison with the “is part of” relationship querying of <a href="https://relationfield.github.io/">RelationField</a>, which comes closest to hierarchical scene understanding. The pixel of interest is on the fridge door. 
-      While RelationField highlights only part of the fridge and handles single level hierarchies, OpenHype naturally supports hierarchical grouping by leveraging the structure of 
-      our hyperbolic embeddings, without requiring explicit queries.
-  </p>
-
-    <img src="./static/images/relationfield.png"
-                    class="teaser-image"
-                    alt="scene hierarchy example"
-                    style="width: 800px; height: auto;"/>
+<!-- Takeaway. -->
+<section class="hero is-light is-small">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <h2 class="subtitle is-4 has-text-centered" style="margin-bottom: 0;">
+        Latent-space Riemannian flow matching on geometric foundation models is a
+        viable paradigm for generative 3D reconstruction.
+      </h2>
+    </div>
   </div>
 </section>
 
@@ -426,11 +361,11 @@ recent discrete-hierarchy approaches, including N2F2 with an overall IoU of 54.6
 <section class="section" id="BibTeX">
   <div class="container is-max-desktop content">
     <h2 class="title">BibTeX</h2>
-    <pre><code>@article{weijler2025openhype,
-  author    = {Weijler, Lisa and Koch, Sebastian and Poiesi, Fabio and Ropinski, Timo and Hermosilla, Pedro},
-  title     = {OpenHype: Hyperbolic Embeddings for Hierarchical Open-Vocabulary Radiance Fields},
-  journal   = {NeurIPS},
-  year      = {2025},
+    <pre><code>@article{weijler2026latentrfm,
+  author  = {Weijler, Lisa and Ballester, Irene and Mei, Guofeng and Birdal, Tolga and Hermosilla, Pedro},
+  title   = {Latent Riemannian Flow Matching for Geometry-Grounded 3D Foundation Models},
+  journal = {arXiv preprint},
+  year    = {2026},
 }</code></pre>
   </div>
 </section>
@@ -439,7 +374,7 @@ recent discrete-hierarchy approaches, including N2F2 with an overall IoU of 54.6
 <footer class="footer">
   <div class="container">
     <div class="content has-text-centered">
-      
+
     </div>
     <div class="columns is-centered">
       <div class="column is-8">
@@ -451,9 +386,9 @@ recent discrete-hierarchy approaches, including N2F2 with an overall IoU of 54.6
           </p>
           <p>
             It borrows the source code of <a
-              href="https://github.com/nerfies/nerfies.github.io">this</a> website. 
+              href="https://github.com/nerfies/nerfies.github.io">this</a> website.
               We would like to thank Utkarsh Sinha and Keunhong Park.
-              
+
           </p>
         </div>
       </div>
